@@ -4,6 +4,10 @@ from django.views import View
 import openai
 
 
+def formatTellStroy(message):
+    return
+
+
 class GptTellStory(View):
     def get(self, request, *args, **kwargs):
         prompt = "generate a story for my kid with its title"
