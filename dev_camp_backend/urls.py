@@ -20,6 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # registration paths
+    # Auth paths
     path('auth/', include('users.urls')),
+
+    # GPT paths
+    path('gpt/', include('gpt_integration.urls')),
 ]

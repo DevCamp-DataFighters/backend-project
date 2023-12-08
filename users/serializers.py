@@ -176,7 +176,7 @@ class Profile_Update_Serializer(serializers.ModelSerializer):
     def save(self, user,  *args, **kwargs):
 
         user_var = User.objects.get(username=user.username)
-        Simple_user = SimpleUser.objects.get(user=user)
+        Simple_user = Student.objects.get(user=user)
 
         user_fields = ["first_name", "last_name", "email"]
         simple_user_fields = ["company_name",  "wilaya", "phone", "CNN",
