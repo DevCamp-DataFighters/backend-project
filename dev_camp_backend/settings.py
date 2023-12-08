@@ -150,8 +150,9 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = "users.User"
 
 # gpt code
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 '192.168.18.182']
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",  # Replace with your Next.js application URL
+]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
