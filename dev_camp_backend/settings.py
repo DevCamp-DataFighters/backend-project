@@ -46,10 +46,12 @@ INSTALLED_APPS = [
     'django_extensions',
     'users',
     'gpt_integration',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,6 +59,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # the middleware of the CORS (added by Najib)
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'dev_camp_backend.urls'
@@ -133,6 +140,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# changes in settings start from here
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -142,6 +150,11 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = "users.User"
 
 # gpt code
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",  # Replace with your Next.js application URL
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Set your OpenAI API key
 openai.api_key = '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'
