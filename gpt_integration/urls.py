@@ -1,7 +1,10 @@
 # gpt_integration/urls.py
 from django.urls import path
-from .views import GPT3PromptView
+from .views import GptFillGaps, GptTellStory, GptQuiz, GptGradeEssay
 
 urlpatterns = [
-    path('gpt3/', GPT3PromptView.as_view(), name='gpt3-prompt'),
+    path('tell_story/', GptTellStory.as_view(), name='gpt-tell-story'),
+    path('quiz/', GptQuiz.as_view(), name='gpt-quiz'),
+    path('grade_essay/', GptGradeEssay.as_view(), name='gpt-grade-essay'),
+    path('fill_gaps/', GptFillGaps.as_view(), name='gpt-fill-gaps'),
 ]
