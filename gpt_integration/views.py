@@ -6,7 +6,7 @@ import openai
 
 class GptTellStory(View):
     def get(self, request, *args, **kwargs):
-        prompt = "make me a filling gap exercice"
+        prompt = "generate a story for my kid with its title"
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-1106",
@@ -15,15 +15,17 @@ class GptTellStory(View):
                 {"role": "user", "content": prompt},
             ],
         )
+        try:
+            generated_text = response['choices'][0]['message']
 
-        generated_text = response['choices'][0]['message']
-
-        return JsonResponse({'generated_text': generated_text})
+            return JsonResponse(generated_text)
+        except Exception as e:
+            return JsonResponse({"error": str(e)})
 
 
 class GptQuiz(View):
     def get(self, request, *args, **kwargs):
-        prompt = "make me a filling gap exercice"
+        prompt = "generate a new quiz for my kid"
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-1106",
@@ -33,14 +35,18 @@ class GptQuiz(View):
             ],
         )
 
-        generated_text = response['choices'][0]['message']
+        try:
+            generated_text = response['choices'][0]['message']
 
-        return JsonResponse({'generated_text': generated_text})
+            return JsonResponse(generated_text)
+        except Exception as e:
+            return JsonResponse({"error": str(e)})
 
 
 class GptFillGaps(View):
     def get(self, request, *args, **kwargs):
-        prompt = "make me a filling gap exercice"
+        prompt = """generate a new filling gap excercice of 3 questions 
+                and their options and their answers for my kid"""
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-1106",
@@ -50,16 +56,20 @@ class GptFillGaps(View):
             ],
         )
 
-        generated_text = response['choices'][0]['message']
+        try:
+            generated_text = response['choices'][0]['message']
 
-        return JsonResponse({'generated_text': generated_text})
+            return JsonResponse(generated_text)
+        except Exception as e:
+            return JsonResponse({"error": str(e)})
 
 
 class GptGradeEssay(View):
-    def get(self, request, *args, **kwargs):
-        prompt = request.POST.get('prompt', '')
-        if not prompt:
-            return JsonResponse({'error': 'Prompt is required in the POST request'}, status=400)
+    def post(self, request, *args, **kwargs):
+        essay = request.POST.get('essay', '')
+        prompt = "grade this essay writtent by my kid: "+essay
+        if not essay:
+            return JsonResponse({'error': 'Essay is required in the POST request'}, status=400)
 
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-1106",
@@ -69,6 +79,9 @@ class GptGradeEssay(View):
             ],
         )
 
-        generated_text = response['choices'][0]['message']
+        try:
+            generated_text = response['choices'][0]['message']
 
-        return JsonResponse({'generated_text': generated_text})
+            return JsonResponse(generated_text)
+        except Exception as e:
+            return JsonResponse({"error": str(e)})
