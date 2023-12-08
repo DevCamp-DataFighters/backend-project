@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import openai
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     # project apps
     'django_extensions',
     'users',
+    'gpt_integration',
 
 ]
 
@@ -137,3 +140,8 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "users.User"
+
+# gpt code
+
+# Set your OpenAI API key
+openai.api_key = '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'
